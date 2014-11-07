@@ -17,12 +17,11 @@ public class UpdateFormUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		Object object = session.getAttribute(LoginServlet.SESSION_USER_ID);
-		if (object == null) {
+		String userId = SessionUtils.getStringValue(session, LoginServlet.SESSION_USER_ID);
+		if (userId == null) {
 			resp.sendRedirect("/");
 			return;
 		}
-		String userId = (String)object;
 		System.out.println("User Id : " + userId);
 		UserDAO userDao = new UserDAO();
 		try {
