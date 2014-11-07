@@ -27,9 +27,13 @@ public class UserDAOTest {
 		User user = UserTest.TEST_USER;
 		userDao.removeUser(user.getUserId());
 		userDao.addUser(user);
-		
 		User dbUser = userDao.findByUserId(user.getUserId());
 		assertEquals(user, dbUser);
+		
+		User updateUser = new User(user.getUserId(), "uPassword", "update name", "update@slipp.net");
+		userDao.updateUser(updateUser);
+		dbUser = userDao.findByUserId(updateUser.getUserId());
+		assertEquals(updateUser, dbUser);
 	}
 	
 	@Test
